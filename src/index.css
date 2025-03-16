@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  @apply font-sans;
+}
+
 @layer utilities {
     ::-webkit-scrollbar-track {
       background: transparent;
