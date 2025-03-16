@@ -2,11 +2,9 @@
 import { useState, ChangeEvent, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 
-export function Content() {
+export function MainContent() {
     const [markdown, setMarkdown] = useState<string>("");
     const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-    const rightClickAvailable = true;
 
     // Auto resize for textarea
     const autoResize = () => {
@@ -19,19 +17,7 @@ export function Content() {
 
     useEffect(() => {
         autoResize();
-
-        // Disable right-click context menu
-        if (!rightClickAvailable) {
-            const handleContextMenu = (e: MouseEvent) => {
-                e.preventDefault();
-            };
-            document.addEventListener("contextmenu", handleContextMenu);
-            return () => {
-                document.removeEventListener("contextmenu", handleContextMenu);
-            };
-        }
-
-    }, [markdown, rightClickAvailable]);
+    }, [markdown]);
 
     // Handle textarea change
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -60,7 +46,7 @@ export function Content() {
     return (
         <div className="px-6 mb-12 flex flex-col items-center">
             {/* Load file */}
-            <div className="mb-4 mt-7">
+            <div className="w-full max-w-3xl mb-4 mt-7">
                 <input type="file" accept=".md,.txt" onChange={handleFileUpload} />
             </div>
 
@@ -70,10 +56,12 @@ export function Content() {
                 value={markdown}
                 onChange={handleChange}
                 placeholder="Start writing!"
-                className="w-full  max-w-3xl p-4 border-[3px] border-black rounded mb-4 shadow-[3px_3px] outline-none resize-none overflow-hidden"
+                className="w-full  max-w-3xl p-4 border-[3px] border-black rounded mb-8 shadow-[3px_3px] outline-none resize-none overflow-hidden"
             />
 
-            <p>Rendered</p>
+            <p className="w-full max-w-3xl font-bold text-xl mb-2">
+                Rendered
+            </p>
 
             {/* Render Markdown */}
             <div className="prose max-w-3xl border-[3px] border-black rounded shadow-[3px_3px] p-4 w-full bg-white">
