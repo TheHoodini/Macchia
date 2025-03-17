@@ -5,6 +5,8 @@ import IconText from "../../assets/text.svg";
 import IconCode from "../../assets/code.svg";
 import IconAddFile from "../../assets/add_file.svg";
 
+import { MButton } from "../ui/MButton";
+
 export function MainContent() {
     const [markdown, setMarkdown] = useState<string>("");
     const [mode, setMode] = useState<"editor" | "render">("editor");
@@ -76,28 +78,23 @@ export function MainContent() {
                 style={{ maxHeight: "70vh" }} // Max scroll height 
             >
                 {/* Buttons */}
-                <div className="sticky top-3 right-2 flex justify-end pr-3 z-10">
-                    <button
+                <div className="sticky top-3 right-2 flex justify-end pr-3 z-10 gap-2">
+                    <MButton
                         onClick={() => setMode("editor")}
-                        className={`px-2 mr-2 py-1 rounded border-black border-[3px] shadow-[1px_1px] active:scale-95 transition  ${mode === "editor"
-                            ? "bg-gray-200"
-                            : "bg-white"
-                            }`}
+                        marked={mode === "editor"} 
                         title="Editor"
-                    >
-                        <img src={IconCode} alt="Text" style={{ width: '20px', height: '20px' }} />
-                    </button>
-                    <button
+                        icon={IconCode}
+                        hover 
+                    />
+                    <MButton
                         onClick={() => setMode("render")}
-                        className={`px-2 py-1 rounded border-black border-[3px] shadow-[1px_1px] active:scale-95 transition  ${mode === "render"
-                            ? "bg-gray-200"
-                            : "bg-white"
-                            }`}
+                        marked={mode === "render"} 
                         title="Render"
-                    >
-                        <img src={IconText} alt="Text" style={{ width: '20px', height: '20px' }} />
-                    </button>
+                        icon={IconText}
+                        hover 
+                    />
                 </div>
+
 
                 {/* Markdown textarea */}
                 <div className="pl-4">

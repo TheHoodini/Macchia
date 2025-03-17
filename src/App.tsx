@@ -23,7 +23,7 @@ export function App() {
   return (
     <div className="h-screen flex flex-col">
       <Header />
-      <main className="bg-cyan-100 flex-1 overflow-y-auto">
+      <main className="bg-[#38dbff] flex-1 overflow-y-auto">
         <MainContent />
       </main>
     </div>

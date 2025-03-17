@@ -9,7 +9,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Lato', 'ui-sans-serif', 'system-ui'], 
-        playfair: ['Playfair Display', 'serif'],
+        oswald: ['Oswald', 'sans-serif'],
         roboto_slab: ['Roboto Slab', 'serif'],
       },
     },
