@@ -10,6 +10,7 @@ export default {
       fontFamily: {
         sans: ['Lato', 'ui-sans-serif', 'system-ui'], 
         playfair: ['Playfair Display', 'serif'],
+        roboto_slab: ['Roboto Slab', 'serif'],
       },
     },
   },
