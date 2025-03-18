@@ -16,14 +16,12 @@ export function ButtonsContainer({ mode, setMode }: ButtonsContainerProps) {
                 marked={mode === "editor"}
                 title="Editor"
                 icon={IconCode}
-                shadow
             />
             <MButton
                 onClick={() => setMode("render")}
                 marked={mode === "render"}
                 title="Render"
                 icon={IconText}
-                shadow
             />
         </div>
     );
