@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import sanitizeHtml from "sanitize-html";
 
 interface TextareaContainerProps {
   markdown: string;
@@ -34,9 +36,21 @@ export function TextareaContainer({ markdown, setMarkdown, mode }: TextareaConta
     }
   }, [markdown, mode]);
 
+  // Sanitize user input
+  const cleanMarkdown = sanitizeHtml(markdown, {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      img: ["src", "alt", "title", "width", "height"],
+      a: ["href", "target", "rel"],
+    },
+    allowedIframeHostnames: ["www.youtube.com", "player.vimeo.com"],
+  });
+
   return (
     <div className="p-4 w-full">
       {mode === "editor" ? (
+        // Editor mode
         <textarea
           ref={textareaRef}
           value={markdown}
@@ -46,9 +60,14 @@ export function TextareaContainer({ markdown, setMarkdown, mode }: TextareaConta
           style={{ minHeight: "295px" }}
         />
       ) : (
-        <div className="prose w-full max-w-none break-words whitespace-pre-wrap" style={{ minHeight: "300px" }}>
-          {markdown ? (
-            <ReactMarkdown>{markdown.replace(/\n\n/g, "\n")}</ReactMarkdown>
+        // Rendered Markdown mode
+        <div
+          className="prose w-full max-w-none break-words whitespace-pre-wrap overflow-hidden
+          [&_*]:my-2 [&_ul]:m-0 [&_ol]:mb-1"
+          style={{ minHeight: "300px" }}
+        >
+          {cleanMarkdown ? (
+            <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cleanMarkdown}</ReactMarkdown>
           ) : (
             <p className="italic text-gray-400">Looks empty here too...</p>
           )}
