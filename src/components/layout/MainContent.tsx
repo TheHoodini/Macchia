@@ -84,14 +84,14 @@ export function MainContent() {
                         marked={mode === "editor"} 
                         title="Editor"
                         icon={IconCode}
-                        hover 
+                        shadow
                     />
                     <MButton
                         onClick={() => setMode("render")}
                         marked={mode === "render"} 
                         title="Render"
                         icon={IconText}
-                        hover 
+                        shadow
                     />
                 </div>
 
